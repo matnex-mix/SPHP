@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SPhp Admin - {( yield title )}</title>
+
+	<link rel="icon" href="{( App::route('uploads/.trash/sphp.png') )}" />
+	<link rel="stylesheet" type="text/css" href="{( App::route('uploads/.trash/admin/bootstrap.min.css') )}" />
+	<link rel="stylesheet" type="text/css" href="{( App::route('uploads/.trash/admin/font-awesome.min.css') )}" />
+	<link rel="stylesheet" href="{( App::static('admin/bt/bootstrap-table.min.css') )}" />
+
+	<script type="text/javascript" src="{( App::route('uploads/.trash/admin/jquery.min.js') )}"></script>
+	<script type="text/javascript" src="{( App::route('uploads/.trash/admin/bootstrap.bundle.min.js') )}"></script>
+	<script type="text/javascript" src="{( App::route('uploads/.trash/admin/bootbox.min.js') )}"></script>
+	<script type="text/javascript" src="{( App::static('admin/bt/bootstrap-table.min.js') )}"></script>
+</head>
+<body>
+	{( if App::sess('admin') )}
+	<header>
+		<nav class="navbar navbar-light navbar-expand-sm bg-info">
+			<a href="{( App::sroute('') )}" class="navbar-brand">
+				<img src="{( App::route('uploads/.trash/sphp.png') )}" height="28" />
+			</a>
+
+	        <ul class="navbar-nav ml-auto">
+	            <li class="nav-item">
+	                <a href="#" class="nav-link mx-2 text-uppercase">
+	                	<i class="fa fa-user"></i>
+	                	&nbsp;{( App::sess('admin') )}
+	                </a>
+	            </li>
+
+	            <li class="nav-item">
+	                <a href="?logout" class="nav-link mx-2">
+	                	<i class="fa fa-sign-out"></i>
+	                	&nbsp;Logout
+	                </a>
+	            </li>
+	        </ul>
+		</nav>
+	</header>
+	
+	<div class="p-4 p-md-5">
+		{( yield content )}
+	</div>
+
+	<footer>
+		<hr class="mb-0" />
+		<div class="bg-light text-center p-3">
+			&copy; SPhp v{( echo sPhp_version() )} - Matnex Mix 2020.
+			<a href="https://github.com/matnex-mix/SPHP" class="mx-2">
+				Github.com
+			</a>
+
+			<a href="?inf" class="mx-2">
+				Info
+			</a>
+
+			<a href="?crd" class="mx-2">
+				Credits
+			</a>
+		</div>
+	</footer>
+	{( else )}
+
+		<div class="fixed-top w-100 h-100 p-4 p-md-5 d-flex justify-content-center align-items-center">
+			<form action="?login" method="post" class="rounded-lg w-100" style="max-width: 360px;">
+				<div class="rounded-top bg-info p-3">
+					<h4>Login</h4>
+				</div>
+
+				<div class="border p-4">
+					
+					{( errmsg )}
+						<small class="alert alert-danger d-inline-block w-100">{( @error )}</small>
+					{( endmsg )}
+
+					<input name="admin_user" required class="form-control mb-4" placeholder="Admin Username" />
+					<input type="password" name="admin_pass" required class="form-control" placeholder="Admin Password" />
+
+				</div>
+
+				<div class="rounded-bottom bg-info p-3 text-center">
+					<button class="btn btn-primary">
+						Login
+					</button>
+				</div>
+			</form>
+		</div>
+
+	{( endif )}
+</body>
+</html>

@@ -1,0 +1,43 @@
+{( uses admin\layout )}
+
+{( block title )}
+Extension {( @title )}
+{( endblock )}
+
+{( block content )}
+	<h4>
+		<a href="{( App::sroute('') )}"><i class="fa fa-chevron-left"></i>Back</a>
+		&nbsp;<font class="{( if !@enabled )} text-danger {( else )} text-success {( endif )}">Extension [{( @title )}]</font>
+		{( if @enabled )}
+		<a href="?disable" class="btn btn-danger btn-sm ml-4" onclick="d( event );">Disable</a>
+		{( else )}
+		<a href="?enable" class="btn btn-primary btn-sm ml-4">Enable</a>
+		{( endif )}
+	</h4>
+	<hr/>
+	<h4 class="mb-4">Contents ({( echo sizeof(@files) )})</h4>
+	<div class="row">
+		{( for files )}
+		<div class="col-6 col-md-3 col-lg-2 mb-2">
+			<a href="#" class="w-100 btn btn-link btn-light border text-capitalize text-truncate" onclick="bootbox.alert({ message: this.innerText, centerVertical: true });">
+				{( @this )}
+			</a>
+		</div>
+		{( endfor )}
+	</div>
+
+	<script type="text/javascript">
+		function d( c ){
+			c.preventDefault();
+			bootbox.confirm({
+				message: 'Are you sure you want to disable extension ({( @title )})',
+				centerVertical: true,
+				callback: function( $b ){
+					if( $b ){
+						location.href = (c.target.href);
+					}
+				}
+			});
+		}
+	</script>
+{( endblock )}

@@ -1,0 +1,16 @@
+# BEGIN SPHP
+<IfModule mod_rewrite.c>
+
+RewriteEngine On
+
+RewriteRule ^migrate$ migrations/migrate.php [END]
+RewriteRule ^seed$ migrations/seeder.php [END]
+RewriteRule ^admin(.*) includes/SPhp/admin/admin.php [END]
+RewriteRule ^(migrations|includes|langs|models|notes|pages|config.json|props.php|middleware.php).*$ index.php [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond "%{REQUEST_URI}" "!=/index.php"
+RewriteRule . index.php [L]
+
+</IfModule>
+# END SPHP

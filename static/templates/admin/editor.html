@@ -1,0 +1,105 @@
+{( uses admin/layout )}
+
+{( block title )}
+	File Editor
+{( endblock )}
+
+{( block content )}
+	<form id="form" action="?saveFile" method="post">
+		<div class="d-flex align-items-center p- pr-3 border rounded-top">
+			<div class="flex-grow-1">
+				<input class="form-control form-control-lg rounded-0 bg-transparent border-0" value="{( @file )}" disabled />
+			</div>
+			<button type="button" class="btn btn-success" onclick="save();">
+				<i class="fa fa-save"></i>
+				&nbsp;&nbsp;Save
+			</button>
+		</div>
+
+		<div class="border">
+			<textarea id="code">{( @content )}</textarea>
+		</div>
+	</form>
+
+	<link rel="stylesheet" type="text/css" href="{( App::static('admin/lib/codemirror.css') )}" />
+	<link rel="stylesheet" type="text/css" href="{( App::static('admin/lib/dracula.css') )}" />
+	<link rel="stylesheet" type="text/css" href="{( App::static('admin/lib/foldgutter.css') )}" />
+	<link rel="stylesheet" type="text/css" href="{( App::static('admin/lib/dialog.css') )}" />
+
+	<script src="{( App::static('admin/lib/codemirror.js') )}"></script>
+	
+	<script src="{( App::static('admin/lib/foldcode.js') )}"></script>
+	<script src="{( App::static('admin/lib/foldgutter.js') )}"></script>
+	<script src="{( App::static('admin/lib/indent-fold.js') )}"></script>
+	<script src="{( App::static('admin/lib/xml-fold.js') )}"></script>
+	<script src="{( App::static('admin/lib/comment-fold.js') )}"></script>
+	<script src="{( App::static('admin/lib/brace-fold.js') )}"></script>
+
+	<script src="{( App::static('admin/lib/matchbrackets.js') )}"></script>
+	<script src="{( App::static('admin/lib/matchtags.js') )}"></script>
+	<script src="{( App::static('admin/lib/closetag.js') )}"></script>
+	<script src="{( App::static('admin/lib/closebrackets.js') )}"></script>
+
+	<script src="{( App::static('admin/lib/dialog.js') )}"></script>
+	<script src="{( App::static('admin/lib/search.js') )}"></script>
+	<script src="{( App::static('admin/lib/searchcursor.js') )}"></script>
+	<script src="{( App::static('admin/lib/jump-to-line.js') )}"></script>
+	<script src="{( App::static('admin/lib/match-highlighter.js') )}"></script>
+
+	<script src="{( App::static('admin/lib/clike.js') )}"></script>
+	<script src="{( App::static('admin/lib/xml.js') )}"></script>
+	<script src="{( App::static('admin/lib/css.js') )}"></script>
+	<script src="{( App::static('admin/lib/javascript.js') )}"></script>
+	<script src="{( App::static('admin/lib/htmlmixed.js') )}"></script>
+	<script src="{( App::static('admin/lib/php.js') )}"></script>
+	<script src="{( App::static('admin/lib/sublime.js') )}"></script>
+
+	<script type="text/javascript">
+      	CodeMirror.commands.save = function(){ save(); };
+		var editor = CodeMirror.fromTextArea($('#code')[0], {
+		    lineNumbers: true,
+		    theme: 'dracula',
+		    indentUnit: 4,
+		    autofocus: true,
+		    mode: {name: "php", json: true},
+		    keyMap: "sublime",
+        	matchBrackets: true,
+        	matchTags: true,
+        	autoCloseTags: true,
+		    foldGutter: true,
+		    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+	        showCursorWhenSelecting: true,
+	        inputStyle: "contenteditable"
+		});
+
+		editor.setSize(null, $(window).height()-80);
+
+		function save(){
+			window.a = bootbox.dialog({
+				'message': '<i class="fa fa-spinner fa-spin"></i>&nbsp; Saving...',
+				closeButton: false,
+				centerVertical: true
+			});
+
+			window.end = editor.getCursor();
+
+			$.post('?saveFile', {
+				data: editor.getValue()
+			}).then(function(d, s){
+				console.log(d);
+				finish('<div class="alert alert-success mb-0"><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Saved</div>');
+			}).catch(function(e){
+				finish('<div class="alert alert-info mb-0"><i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;An error ocurred</div>');
+			});
+		}
+
+		function finish( msg ){
+			window.a.find('.modal-body').html(msg);
+			setTimeout(function(){
+				window.a.modal('hide');
+				editor.focus();
+				editor.setCursor(window.end);
+			}, 1000);
+		}
+	</script>
+{( endblock )}

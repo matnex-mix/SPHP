@@ -1,0 +1,64 @@
+{( @n | addslashes )}
+{( @n | capfirst )}
+[{( @n | center-200 )}]
+
+{%
+
+{( for 3 )}
+{( rand 5 6 '7'.'7' )}
+{( endfor )}
+
+%}
+
+{%
+
+{( scsmsg )}
+	<div class="">
+		<h4>{( @success )}</h4>
+	</div>
+{( errmsg )}
+	<div class="">
+		<h4>{( @error )}</h4>
+	</div>
+{( endmsg )}
+
+%}
+
+{%
+if still not working perfectly
+
+{( var n = 4 )}
+
+{( if @n==1 )}
+	{( if @n==1 )}
+		{( if @n==1 )}
+			DEPTH_IF_3
+		{( endif )}
+	{( endif )}
+{( elseif @n==2 )}
+	{( if @n==2 )}
+		{( if @n==2 )}
+			DEPTH_ELIF_3
+		{( endif )}
+	{( endif )}
+{( else )}
+	{( if @n==2 )}
+	{( else )}
+		{( if @n==2 )}
+		{( else )}
+			DEPTH_ELSE_3
+		{( endif )}
+	{( endif )}
+{( endif )}
+
+%}
+
+{%
+star pyramid with sphp for loop
+
+<b>
+{( for 30 )}
+<br/>{( var d=floor((30-@i+1)/2) )}|{( for @d )}&nbsp;{( endfor )}{( for @i+1 )}.{( endfor )}{( for @d )}&nbsp;{( endfor )}|{( endfor )}
+</b>
+
+%}

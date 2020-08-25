@@ -1,0 +1,10 @@
+{
+	"insert": {
+		"users": {
+			"created_at": {
+				"type": "datetime",
+				"length": 1
+			}
+		}
+	}
+}

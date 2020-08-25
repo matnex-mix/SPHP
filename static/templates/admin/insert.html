@@ -1,0 +1,46 @@
+{( uses admin/layout )}
+
+{( block title )}
+Insert Data
+{( endblock )}
+
+{( block content )}
+	<form action="?addData" method="post" class="mx-auto w-100 p-4 border rounded" style="max-width: 500px;">
+		<h4>Add Data</h4>
+		<hr/>
+
+		<p>
+			{( for columns )}
+			<div class="my-2">
+				{( var type = explode('(', @this.Type)[0] )}
+
+				{( if @this.Field=='id' )}
+				{( elseif in_array(@type, [ 'time', 'datetime', 'timestamp', 'date', 'year' ]) )}
+					<input type="date" name="{( @this.Field )}" class="form-control" placeholder="{( echo ucfirst(@this.Field) )}" value="{( Date('Y-m-d') )}" />
+				{( elseif in_array(@type, [ 'int', 'double', 'float', 'real', 'decimal', 'tinyint', 'bigint' ]) )}
+					<input type="number" step="0.1" min="0" name="{( @this.Field )}" class="form-control" placeholder="{( echo ucfirst(@this.Field) )}" />
+				{( elseif strpos(@type, 'text')!==FALSE || @type=='varchar' )}
+					<textarea name="{( @this.Field )}" class="form-control" placeholder="{( echo ucfirst(@this.Field) )}"></textarea>
+				{( elseif @type=='boolean' )}
+					<input type="checkbox" name="{( @this.Field )}" class="form-control" placeholder="{( echo ucfirst(@this.Field) )}" />
+				{( elseif @type=='enum' )}
+					{( var choices = explode(',', str_replace([ 'enum', '(', ')' ], '', @this.Type)) )}
+
+					<small>{( echo ucfirst(@this.Field) )}:</small>
+					<select class="form-control" name="{( @this.Field )}">
+					{( for choices )}
+						<option>{( echo str_replace('\'', '', @this) )}</option>
+					{( endfor )}
+					</select>
+				{( else )}
+					<textarea name="{( @this.Field )}" class="form-control" placeholder="{( echo ucfirst(@this.Field) )}"></textarea>
+				{( endif )}
+			</div>
+			{( endfor )}
+		</p>
+
+		<button class="btn btn-primary">
+			Add
+		</button>
+	</form>
+{( endblock )}

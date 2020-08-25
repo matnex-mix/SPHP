@@ -1,0 +1,111 @@
+{( uses admin/layout )}
+
+{( block title )}
+	Tables
+{( endblock )}
+
+{( block content )}
+	<nav aria-label="breadcrumb" class="mb-4">
+	  	<ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a href="{( App::sroute('') )}">Home</a></li>
+		    <li class="breadcrumb-item">Database</li>
+		    <li class="breadcrumb-item active" aria-current="page">{( @name )}</li>
+	  	</ol>
+	</nav>
+
+	{( scsmsg )}
+	<div class="alert alert-success">
+		{( @success )}
+	</div>
+	{( errmsg )}
+	<div class="alert alert-danger">
+		{( @error )}
+	</div>
+	{( endmsg )}
+
+	<div class="">
+		<div class="d-flex py-3">
+			<div class="flex-grow-1 mr-3">
+				<input id="filter" type="search" name="k" class="form-control" placeholder="Filter..." />
+			</div>
+
+			<a href="{( echo App::croute('tables/'. @name .'/insert') )}" class="ml-auto btn btn-primary">
+				<i class="fa fa-plus-circle text-warning"></i>
+				insert
+			</a>
+		</div>
+
+		{( if sizeof(@data) )}
+		<form id="form-data" method="post" action="?tableOptions" class="table-responsive">
+			<table id="data" class="border rounded" data-toggle="table">
+				<thead>
+					<tr class="head">
+						{( if !empty(@data.0.id) )}
+						<th>
+							<input type="checkbox" onclick="$('.checks').prop('checked', this.checked);" />
+						</th>
+						<th>Actions</th>
+						{( endif )}
+						{( for @data.0 )}
+						<th data-field="{( @i )}" data-sortable="true">{( @i )}</th>
+						{( endfor )}
+					</tr>
+				</thead>
+
+				<tbody>
+				{( for data )}
+					<tr>
+						{( if !empty(@this.id) )}
+						<td>
+							<input type="checkbox" name="{( @this.id )}" class="checks" />
+						</td>
+						<td>
+							<button formaction="{( echo App::croute('tables/'. @name .'/edit') )}" href="#" name="action" value="edit" class="btn btn-link" onclick="this.parentElement.previousElementSibling.children[0].checked = true; $('#form-data').submit();" >
+								<i class="fa fa-pencil text-warning"></i>
+								edit
+							</button>
+							<button href="#" name="action" value="delete" class="btn btn-link" onclick="this.parentElement.previousElementSibling.children[0].checked = true; $('#form-data').submit();" >
+								<i class="fa fa-minus-circle text-danger"></i>
+								delete
+							</button>
+							<!--button href="#" name="action" value="copy" class="btn btn-link" onclick="this.parentElement.previousElementSibling.children[0].checked = true; $('#form-data').submit();" >
+								<i class="fa fa-share text-primary"></i>
+								copy
+							</button-->
+						</td>
+						{( endif )}
+
+						{( for this )}
+						<td>
+							<div class="text-truncate" style="max-width: 200px;">{( @this )}</div>
+						</td>
+						{( endfor )}
+					</tr>
+				{( endfor )}
+				</tbody>
+			</table>
+		</form>
+		
+		{( else )}
+
+		<div class="bg-light border p-4 p-md-5">
+			<h4 align="center">
+				<i class="fa fa-times-circle text-danger"></i>
+				&nbsp;&nbsp;Oops!
+				Table is empty.
+			</h4>
+		</div>
+		{( endif )}
+	</div>
+
+	 <script>
+		$(document).ready(function(){
+		  $("#filter").on("keyup", function() {
+		    var value = $(this).val().toLowerCase();
+		    $("#data>tbody>tr:not(.head)").filter(function() {
+		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		    });
+		  });
+		});
+	</script>
+{( endblock )}

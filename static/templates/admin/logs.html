@@ -1,0 +1,18 @@
+{( uses admin/layout )}
+
+{( block title )}
+	Error Logs
+{( endblock )}
+
+{( block content )}
+	<div class="bg-light p-4 border border-secondary rounded-lg">
+		<h4>Error Logs</h4>
+		<hr/>
+
+		{( for errors )}
+		<p>
+			<b>[ {( echo Date('h:i:sA. D m M, Y', @this.time) )} ]</b> {( @this.value )}
+		</p>
+		{( endfor )}
+	</div>
+{( endblock )}

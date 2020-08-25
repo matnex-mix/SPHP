@@ -1,0 +1,35 @@
+{
+    "MODE": "debug",
+    "LANGUAGE": "hindi",
+    "LOCALIZATION": {
+        "en": "english",
+        "in": "hindi"
+    },
+    "DB": [
+        {
+            "user": "admin",
+            "pass": "admin",
+            "host": "localhost",
+            "name": "test"
+        },
+        {
+            "name": "wordpress"
+        },
+        {
+            "name": "examinate"
+        }
+    ],
+    "RECOVERY": {
+        "pass": "sphp_1.0.0",
+        "signature": "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"
+    },
+    "ADMIN": {
+        "author": "SPhp Admin",
+        "username": "sphp-admin",
+        "password": "$2y$10$Gpwcdzz7TwYtNunKvrZO2e9tPoXvsUPjU7DgP05USXye4uT6.ZTmi"
+    },
+    "MIDDLEWARE": [
+        "includes\/SPhp_Rest",
+        "includes\/vendor"
+    ]
+}

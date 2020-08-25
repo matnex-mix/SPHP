@@ -1,0 +1,132 @@
+{( uses admin/layout )}
+
+{( block title )}
+	Main
+{( endblock )}
+
+{( block content )}
+	<div class="px-4 mb-4">
+		<a href="{( App::sroute('/!/error_logs') )}" class="btn btn-danger">
+			<i class="fa fa-lg fa-exclamation-circle"></i>
+			&nbsp;Error Logs
+		</a>
+
+		<a target="_blank" href="{( @config.url )}" class="btn btn-primary">
+			<i class="fa fa-lg fa-eye"></i>
+			&nbsp;View app
+		</a>
+
+		<a href="{( App::sroute('!/editor/'.urlencode(base64_encode('config.json'))) )}" class="btn btn-danger">
+			<i class="fa fa-lg fa-sliders"></i>
+			&nbsp;Edit Configuration
+		</a>
+
+		<a target="_blank" href="{( @config.url )}/seed" class="btn btn-primary">
+			<i class="fa fa-lg fa-plus-circle"></i>
+			&nbsp;Seed database
+		</a>
+
+		<a target="_blank" href="{( @config.url )}/migrate" class="btn btn-warning">
+			<i class="fa fa-lg fa-plane"></i>
+			&nbsp;Make Migrations
+		</a>
+	</div>
+
+	<div class="row">
+		<div class="col-12 col-md-6 col-lg-4 mb-4">
+			<div class="bg-white p-4">
+				<div class="d-flex justify-content-between mb-4">
+					<h4><i class="fa fa-database"></i>&nbsp;&nbsp; Data Tables</h4>
+
+					<form action="?setDB" method="post">
+						<select name="e" onchange="this.parentElement.submit();" class="form-control form-control-sm">
+							{( for dbs )}
+							<option value="{( @i )}" {( @i == App::sess('db_index') ? 'selected' : '' )}>{( @this.name )}</option>
+							{( endfor )}
+						</select>
+					</form>
+				</div>
+
+				<div class="list-group">
+					{( while @tables->fetch_array() )}
+					<a href="{( echo App::croute('tables/'.@this.0) )}" class="list-group-item list-group-item-action text-primary">
+						{( @this.0 )}
+					</a>
+					{( endwhile )}
+				</div>
+			</div>
+		</div>
+
+		<div class="col-12 col-md-6 col-lg-4 mb-4">
+			<div class="bg-white p-4">
+				<h4 class="mb-4"><i class="fa fa-plug"></i>&nbsp;&nbsp; Models</h4>
+
+				<div class="list-group">
+					{( for @models )}
+					<a href="{( echo App::sroute('!/editor/'.urlencode(base64_encode('models/'.@this))) )}" class="list-group-item list-group-item-action text-primary text-capitalize">
+						{( @this )}
+					</a>
+					{( endfor )}
+				</div>
+			</div>
+		</div>
+
+		<div class="col-12 col-md-6 col-lg-4 mb-4">
+			<div class="bg-white p-4">
+				<h4 class="mb-4"><i class="fa fa-code"></i>&nbsp;&nbsp; Templates</h4>
+
+				<div class="list-group">
+					{( for @templates )}
+						{( if strpos(@this, 'admin')===FALSE )}
+							<a href="{( echo App::sroute('!/editor/'.urlencode(base64_encode('static/templates/'.@this))) )}" class="list-group-item list-group-item-action text-primary text-capitalize">
+								{( @this )}
+							</a>
+						{( endif )}
+					{( endfor )}
+				</div>
+			</div>
+		</div>
+
+		<div class="col-12 col-md-6 col-lg-4 mb-4">
+			<div class="bg-white p-4">
+				<h4 class="mb-4"><i class="fa fa-arrows-alt"></i>&nbsp;&nbsp; Extensions</h4>
+
+				<div class="list-group">
+					{( for @extensions )}
+					<a href="{( echo App::sroute('/!/extension/'.preg_replace( '/^-/', '', str_replace('/', '.', @this))) )}" class="list-group-item list-group-item-action text-primary text-capitalize">
+						{( @this )}
+					</a>
+					{( endfor )}
+				</div>
+			</div>
+		</div>
+
+		<div class="col-12 col-md-6 col-lg-4 mb-4">
+			<div class="bg-white p-4">
+				<h4 class="mb-4"><i class="fa fa-plane"></i>&nbsp;&nbsp; Unsaved Migrations</h4>
+
+				<div class="list-group">
+					{( for @migrations )}
+					<a href="{( echo App::sroute('!/editor/'.urlencode(base64_encode('migrations/'.@this))) )}" class="list-group-item list-group-item-action text-primary text-capitalize">
+						{( @this )}
+					</a>
+					{( endfor )}
+				</div>
+			</div>
+		</div>
+
+		<div class="col-12 col-md-6 col-lg-4 mb-4">
+			<div class="bg-white p-4">
+				<h4 class="mb-4"><i class="fa fa-language"></i>&nbsp;&nbsp; Languages</h4>
+
+				<div class="list-group">
+					{( for @langs )}
+					<a href="{( echo App::sroute('!/editor/'.urlencode(base64_encode('langs/'.@this))) )}" class="list-group-item list-group-item-action text-primary text-capitalize">
+						{( @this )}
+					</a>
+					{( endfor )}
+				</div>
+			</div>
+		</div>
+	</div>
+{( endblock )}
