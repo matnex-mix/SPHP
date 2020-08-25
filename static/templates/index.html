@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{( L::get('greet') )}</title>
+
+	<link rel="icon" href="{( App::static('sphp.png') )}" />
+	<link rel="stylesheet" type="text/css" href="{( App::static('admin/bootstrap.min.css') )}" />
+	<link rel="stylesheet" type="text/css" href="{( App::static('admin/font-awesome.min.css') )}" />
+	<link rel="stylesheet" href="{( App::static('admin/bt/bootstrap-table.min.css') )}" />
+</head>
+<body>
+
+	<div class="fixed-top w-100 h-100 d-flex align-items-center justify-content-center p-4 p-md-5">
+
+		<div class="">
+			<div class="border border-info p-4 p-md-5" style="border-radius: 25px; border-width: 3px !important;">
+				<img src="{( App::static('sphp.png') )}" height="160" />
+			</div>
+
+			<br/>
+			<h5 align="center">v{( echo sPhp_version() )}</h5>
+
+			<br/>
+			<p align="center">
+				&copy; Matnex Mix 2020.
+				<a href="https://github.com/matnex-mix/SPHP" class="mx-2">
+					Github.com
+				</a>
+
+				<a href="admin" class="mx-2">
+					Admin
+				</a>
+
+				<a href="admin?inf" class="mx-2">
+					Info
+				</a>
+
+				<a href="admin?crd" class="mx-2">
+					Credits
+				</a>
+			</p>
+		</div>
+
+	</div>
+</body>
+</html>
