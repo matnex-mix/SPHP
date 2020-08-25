@@ -1,11 +1,12 @@
 # SPHP - Simplified PHP
+Simplified PHP for beginers, makes projects fatser with Database management, Localizations, Admin panel, Extensions, File management, Routing and many more.
 
-# Simple How to use
+### Simple How to use
 Clone the repository preferrabely into an htdocs folder where you can serve a php project
 ```
 git clone https://github.com/matnex-mix/sphp.git
 ```
-Edit `config.php` and add a database configuration follow the format there already
+Edit `config.json` and add a database configuration follow the format there already
 ```
 ...
 
@@ -25,7 +26,7 @@ Save and view your app in the browser `http://localhost/sphp`
 - Write the documentation
 
 ### Contribution
-We're glady accepting contribution and issues, create an issue if you have one or add a pull requests
+We're glady accepting contribution and issues, create an issue if you have one or add a pull request to contribute to this project.
 
 ### Contact
 matnex.mix@gmail.com
