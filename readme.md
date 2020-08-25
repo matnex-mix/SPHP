@@ -24,6 +24,7 @@ Save and view your app in the browser `http://localhost/sphp`
 ### Todo
 - Add screenshot to README.md
 - Write the documentation
+- Deploy a hreoku sample
 
 ### Contribution
 We're glady accepting contribution and issues, create an issue if you have one or add a pull request to contribute to this project.
