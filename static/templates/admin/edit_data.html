@@ -22,16 +22,18 @@ Edit Data
 				{( elseif in_array(@type, [ 'time', 'datetime', 'timestamp', 'date', 'year' ]) )}
 					<input type="date" name="{( @this.Field )}[]" class="form-control" placeholder="{( echo ucfirst(@this.Field) )}" value="{( Date('Y-m-d') )}" value="{( @this2[@this.Field] )}" />
 				{( elseif in_array(@type, [ 'int', 'double', 'float', 'real', 'decimal', 'tinyint', 'bigint' ]) )}
-					<input type="number" step="0.1" min="0" name="{( @this.Field )}[]" class="form-control" placeholder="{( echo ucfirst(@this.Field) )}" value="{( @this2[@this.Field] )}" />
+					<input type="text" pattern="[\d.]+" min="0" name="{( @this.Field )}[]" class="form-control" placeholder="{( echo ucfirst(@this.Field) )}" value="{( @this2[@this.Field] )}" />
 				{( elseif strpos(@type, 'text')!==FALSE || @type=='varchar' )}
 					<textarea name="{( @this.Field )}[]" class="form-control" placeholder="{( echo ucfirst(@this.Field) )}">{( @this2[@this.Field] )}</textarea>
 				{( elseif @type=='boolean' )}
 					<input type="checkbox" name="{( @this.Field )}[]" class="form-control" placeholder="{( echo ucfirst(@this.Field) )}" />
 				{( elseif @type=='enum' )}
 					{( var choices = explode(',', str_replace([ 'enum', '(', ')' ], '', @this.Type)) )}
-					<select class="form-control" name="{( @this.Field )}[]" value="{( @this2[@this.Field] )}">
+					<select class="form-control" name="{( @this.Field )}[]">
+					{( var this3 = @this )}
 					{( for choices )}
-						<option>{( echo str_replace('\'', '', @this) )}</option>
+						{( var r = str_replace('\'', '', @this) )}
+						<option {( if @this2[@this3.Field]==@r )}selected{( endif )}>{( @r )}</option>
 					{( endfor )}
 					</select>
 				{( else )}

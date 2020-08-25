@@ -3,14 +3,14 @@
 <head>
 	<title>SPhp Admin - {( yield title )}</title>
 
-	<link rel="icon" href="{( App::route('uploads/.trash/sphp.png') )}" />
-	<link rel="stylesheet" type="text/css" href="{( App::route('uploads/.trash/admin/bootstrap.min.css') )}" />
-	<link rel="stylesheet" type="text/css" href="{( App::route('uploads/.trash/admin/font-awesome.min.css') )}" />
+	<link rel="icon" href="{( App::static('sphp.png') )}" />
+	<link rel="stylesheet" type="text/css" href="{( App::static('admin/bootstrap.min.css') )}" />
+	<link rel="stylesheet" type="text/css" href="{( App::static('admin/font-awesome.min.css') )}" />
 	<link rel="stylesheet" href="{( App::static('admin/bt/bootstrap-table.min.css') )}" />
 
-	<script type="text/javascript" src="{( App::route('uploads/.trash/admin/jquery.min.js') )}"></script>
-	<script type="text/javascript" src="{( App::route('uploads/.trash/admin/bootstrap.bundle.min.js') )}"></script>
-	<script type="text/javascript" src="{( App::route('uploads/.trash/admin/bootbox.min.js') )}"></script>
+	<script type="text/javascript" src="{( App::static('admin/jquery.min.js') )}"></script>
+	<script type="text/javascript" src="{( App::static('admin/bootstrap.bundle.min.js') )}"></script>
+	<script type="text/javascript" src="{( App::static('admin/bootbox.min.js') )}"></script>
 	<script type="text/javascript" src="{( App::static('admin/bt/bootstrap-table.min.js') )}"></script>
 </head>
 <body>
@@ -18,7 +18,7 @@
 	<header>
 		<nav class="navbar navbar-light navbar-expand-sm bg-info">
 			<a href="{( App::sroute('') )}" class="navbar-brand">
-				<img src="{( App::route('uploads/.trash/sphp.png') )}" height="28" />
+				<img src="{( App::static('sphp.png') )}" height="28" />
 			</a>
 
 	        <ul class="navbar-nav ml-auto">
