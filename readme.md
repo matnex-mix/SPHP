@@ -1,5 +1,6 @@
 # SPHP - Simplified PHP
 Simplified PHP for beginers, makes projects fatser with Database management, Localizations, Admin panel, Extensions, File management, Routing and many more.
+<img src="" height="400" />
 
 ### Simple How to use
 Clone the repository preferrabely into an htdocs folder where you can serve a php project
