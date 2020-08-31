@@ -149,6 +149,11 @@ print_r( Users::get()
 	->show() );
 ```
 
+### SPhp Admin
+Manage your app from within your app, sphp-admin can manage database, show errors and edit files.
+<br/><img src="https://raw.githubusercontent.com/matnex-mix/SPHP/master/screenshots/2.png" height="400" />
+
+
 ### Contribution
 We're glady accepting contribution and issues, create an issue if you have one or add a pull request to contribute to this project.
 
