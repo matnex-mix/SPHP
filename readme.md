@@ -1,6 +1,6 @@
 # SPHP - Simplified PHP
 Simplified PHP for beginers, makes projects fatser with Database management, Localizations, Admin panel, Extensions, File management, Routing and many more.
-<br/><img src="https://raw.githubusercontent.com/matnex-mix/SPHP/master/screenshots/1.png" height="400" />
+<br/><img src="https://raw.githubusercontent.com/matnex-mix/SPHP/master/screenshots/1.png" style="max-height: 400px;" />
 
 ### Simple How to use
 Clone the repository preferrabely into an htdocs folder where you can serve a php project
@@ -226,8 +226,10 @@ var_dump(
 ```
 
 ### SPhp Admin
-Manage your app from within your app, sphp-admin can manage database, show errors and edit files. Visit `APP_URL/admin` and login with username: **sphp-admin**, password: **sphp_admin**.
-<br/><img src="https://raw.githubusercontent.com/matnex-mix/SPHP/master/screenshots/2.png" height="400" />
+Manage your app from within your app, sphp-admin can manage database, show errors and edit files. Visit `APP_URL/admin` and login with
+- username: **sphp-admin**
+- password: **sphp_admin**
+<br/><img src="https://raw.githubusercontent.com/matnex-mix/SPHP/master/screenshots/2.png" style="max-height: 400px;" />
 
 ### Contribution
 We're glady accepting contribution and issues, create an issue if you have one or add a pull request to contribute to this project.

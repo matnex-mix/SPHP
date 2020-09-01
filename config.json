@@ -5,7 +5,7 @@
         "en": "english",
         "in": "hindi"
     },
-    "_DB": [
+    "DB": [
         {
             "user": "admin",
             "pass": "admin",
