@@ -21,12 +21,6 @@ Edit `config.json` and add a database configuration follow the format there alre
 ...
 ```
 Save and view your app in the browser `http://localhost/sphp`
-
-### Todo
-- Add screenshot to README.md
-- Write the documentation
-- Deploy a hreoku sample
-
 <br/>
 
 ## Quick Walk through
@@ -231,6 +225,10 @@ Manage your app from within your app, sphp-admin can manage database, show error
 - password: **sphp_admin**
 
 <br/><br/><img src="https://raw.githubusercontent.com/matnex-mix/SPHP/master/screenshots/2.png" style="max-height: 400px;" />
+
+### Todo
+- Write real documentation
+- Add more template filters
 
 ### Contribution
 We're glady accepting contribution and issues, create an issue if you have one or add a pull request to contribute to this project.
