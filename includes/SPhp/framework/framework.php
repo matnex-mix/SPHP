@@ -159,7 +159,23 @@ class Framework {
 				}
 			}
 			
-			require_once $target_file;
+			try {
+				require_once $target_file;
+			}
+			catch( \Throwable $t ){
+				Error::die([[
+					1,
+					'Error in '.$t->getFile().'('.$t->getLine().') <b>'.$t->getMessage().'</b>',
+					'SCRIPT_PARSE_ERROR'
+				]]);
+			}
+			catch( \Exception $e ){
+				Error::die([[
+					1,
+					'Error in '.$e->getFile().'('.$e->getLine().') <b>'.$e->getMessage().'</b>',
+					'SCRIPT_PARSE_ERROR'
+				]]);
+			}
 		}
 	}
 	public function secure(){
