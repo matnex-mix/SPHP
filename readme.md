@@ -149,10 +149,85 @@ print_r( Users::get()
 	->show() );
 ```
 
-### SPhp Admin
-Manage your app from within your app, sphp-admin can manage database, show errors and edit files.
-<br/><img src="https://raw.githubusercontent.com/matnex-mix/SPHP/master/screenshots/2.png" height="400" />
+### Templating
+SPHP has its own way of automatically passing data to html pages making work easier and faster. Create a new file say `static/templates/test.html` and add:
+```
+<h2>Title: {( @title )}</h2>
+<ul>
+	{( for contents )}
+	<li>{( @this )}</li>
+	{( endfor )}
+</ul>
+```
+and add the below code in `pages/index.php`:
+```
+<?php
+...
 
+echo Template::parse('test', array(
+	'title' => 'Testing SPHP templates',
+	'contents' => [
+		'Item 1',
+		'Item 2',
+		'Item 3'
+	]
+));
+```
+
+### Database class
+For database management, a substitute for MySQL queries. It has methods for the basic common sql operations:
+```
+<?php
+...
+
+# Insert into a database
+var_dump(
+	DB::insert('users', array(
+		'name' => 'Matnex Mix',
+		'created_at' => Date('Y-m-d H:i:s'),
+	))
+);
+
+# Retrieve data example
+# The below code uses some tables which have not been defined, note that this is just and example
+var_dump(
+	DB::table('history')
+		->innerJoin(DB::table('users')
+			->where( '>id', 0 ))
+			->on([
+				'history.user' => 'users.id'
+			])
+		->where( '*history.summary', '%' )
+		->braces('||')
+			->braces('&&')
+				->where( 'history.id', 20 )
+				->where( 'history.id', 21 )
+			->close()
+			->where( '+*history.time', '2020-08-02' )
+		->close()
+		->show()
+);
+
+# Update table
+var_dump(
+	DB::update('users', array(
+		'name' => 'New name'
+	))
+		->where('id', 1)
+		->run()
+);
+
+# Delete data from table
+var_dump(
+	DB::delete('users')
+		->where('id', 1)
+		->run()
+);
+```
+
+### SPhp Admin
+Manage your app from within your app, sphp-admin can manage database, show errors and edit files. Visit `APP_URL/admin` and login with username: **sphp-admin**, password: **sphp_admin**.
+<br/><img src="https://raw.githubusercontent.com/matnex-mix/SPHP/master/screenshots/2.png" height="400" />
 
 ### Contribution
 We're glady accepting contribution and issues, create an issue if you have one or add a pull request to contribute to this project.
