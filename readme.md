@@ -4,11 +4,11 @@ Simplified PHP for beginers, makes projects fatser with Database management, Loc
 
 ### Simple How to use
 Clone the repository preferrabely into an htdocs folder where you can serve a php project
-```
+```diff
 git clone https://github.com/matnex-mix/sphp.git
 ```
 Edit `config.json` and add a database configuration follow the format there already
-```
+```diff
 ...
 
 "DB": [{
@@ -27,7 +27,7 @@ Save and view your app in the browser `http://localhost/sphp`
 
 ### Database Migrations
 Add a json file in the migrations folder let's say `migrations/add_users_table.json` and add the following migration commands in the json file
-```
+```diff
 {
 	"create": {
 		"users": {
@@ -52,7 +52,7 @@ save then visit `APP_URL/migrate`, you should see a sql breakdown of the migrati
 
 ### Seeding a table
 Edit the `migrations/seeder.php` file and add the below code
-```
+```diff
 <?php
 ...
 
@@ -69,7 +69,7 @@ then visit `APP_URL/migrate` in your browser. You should see 10 different rows i
 ### Use localization (different languages)
 An example of this is available when you visit `APP_URL/en` and `APP_URL/in`, you should check the title bar and see the differences. Open the language file `langs/english.php` or `langs/hindi.php` and add the below code
 <br/>`english.php`
-```
+```diff
 <?php
 ...
 
@@ -77,7 +77,7 @@ L::set('hello_world', 'Hello World!');
 ```
 
 <br/>`hindi.php`
-```
+```diff
 <?php
 ...
 
@@ -85,7 +85,7 @@ L::set('hello_world', 'Namaste World!');
 ```
 
 then in your `pages/index.php` file add
-```
+```diff
 <?php
 ...
 
@@ -110,7 +110,7 @@ Models are classes that makes quering database tables easier representing them b
 -----------------------------------
 ```
 would become:
-```
+```diff
 stdClass({
 	->id = 1
 	->name = 'mix'
@@ -118,7 +118,7 @@ stdClass({
 })
 ```
 to use: add a new file `models/users.php` then add below code
-```
+```diff
 <?php
 
 class Users extends Model {
@@ -132,7 +132,7 @@ class Users extends Model {
 }
 ```
 to test: edit `pages/index.php` and add
-```
+```diff
 <?php
 ...
 
@@ -145,7 +145,7 @@ print_r( Users::get()
 
 ### Templating
 SPHP has its own way of automatically passing data to html pages making work easier and faster. Create a new file say `static/templates/test.html` and add:
-```
+```diff
 <h2>Title: {( @title )}</h2>
 <ul>
 	{( for contents )}
@@ -154,7 +154,7 @@ SPHP has its own way of automatically passing data to html pages making work eas
 </ul>
 ```
 and add the below code in `pages/index.php`:
-```
+```diff
 <?php
 ...
 
@@ -170,7 +170,7 @@ echo Template::parse('test', array(
 
 ### Database class
 For database management, a substitute for MySQL queries. It has methods for the basic common sql operations:
-```
+```diff
 <?php
 ...
 
