@@ -3,6 +3,7 @@
 namespace SPhp\Rest\Output;
 
 use SPhp\Framework\Hooks;
+use SPhp\Framework\Framework;
 
 /*
  * Hooks Usage Example
