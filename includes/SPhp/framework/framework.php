@@ -162,6 +162,14 @@ class Framework {
 					}
 				}
 			}
+
+			set_error_handler(function( $a, $b, $c, $d ){
+				Error::die([[
+					1,
+					'Warning Error in '.$c.'('.$d.') <b>'.$b.'</b><br/>',
+					'SCRIPT_PARSE_ERROR'
+				]]);
+			}, E_WARNING);
 			
 			try {
 				require_once $target_file;
