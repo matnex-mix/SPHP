@@ -52,13 +52,13 @@ class Framework {
 			if( strpos($b, "-")===0  )
 				continue;
 
-			$b = realpath(__BASE.'/'.$b.'/autoload.php');
-			$GLOBALS['__MODULE_PATH'] = dirname($b);
+			$c = realpath(__BASE.'/'.$b.'/autoload.php');
+			$GLOBALS['__MODULE_PATH'] = dirname($c);
 
-			if( !@include_once ( $b ) ){
+			if( !@include_once ( $c ) ){
 				Error::die([[
 					1,
-					"Middleware ($b) could not be loaded",
+					"Middleware ($b) could not be loaded, check that it exists.",
 					'EXTENSION_ERROR'
 				]]);
 			}

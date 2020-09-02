@@ -29,7 +29,6 @@
         "password": "$2y$10$Gpwcdzz7TwYtNunKvrZO2e9tPoXvsUPjU7DgP05USXye4uT6.ZTmi"
     },
     "MIDDLEWARE": [
-        "includes\/SPhp_Rest",
-        "includes\/vendor"
+        "includes\/Rest"
     ]
 }

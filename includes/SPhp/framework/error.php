@@ -7,7 +7,7 @@ use Exception;
 
 class Error {
 	protected $template = "";
-	protected $errors = [];
+	public $errors = [];
 
 	public function __construct( $errors ){
 		$this->errors = $errors;

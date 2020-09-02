@@ -1,6 +1,6 @@
 <?php
 
-class Users extends Model {
+class User extends Model {
 
 	// Set Toggle Showing Sql Query Errors
 	protected $show_errors = true;
