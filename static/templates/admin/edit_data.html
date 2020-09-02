@@ -20,7 +20,7 @@ Edit Data
 				{( if @this.Field=='id' )}
 					<input type="" name="id[]" value="{( @this2.id )}" class="form-control" readonly />
 				{( elseif in_array(@type, [ 'time', 'datetime', 'timestamp', 'date', 'year' ]) )}
-					<input type="date" name="{( @this.Field )}[]" class="form-control" placeholder="{( echo ucfirst(@this.Field) )}" value="{( Date('Y-m-d') )}" value="{( @this2[@this.Field] )}" />
+					<input type="date" name="{( @this.Field )}[]" class="form-control" placeholder="{( echo ucfirst(@this.Field) )}" value="{( echo Date('Y-m-d', strtotime(@this2[@this.Field])) )}" value="{( @this2[@this.Field] )}" />
 				{( elseif in_array(@type, [ 'int', 'double', 'float', 'real', 'decimal', 'tinyint', 'bigint' ]) )}
 					<input type="text" pattern="[\d.]+" min="0" name="{( @this.Field )}[]" class="form-control" placeholder="{( echo ucfirst(@this.Field) )}" value="{( @this2[@this.Field] )}" />
 				{( elseif strpos(@type, 'text')!==FALSE || @type=='varchar' )}
