@@ -18,7 +18,7 @@ Insert Data
 				{( elseif in_array(@type, [ 'time', 'datetime', 'timestamp', 'date', 'year' ]) )}
 					<input type="date" name="{( @this.Field )}" class="form-control" placeholder="{( echo ucfirst(@this.Field) )}" value="{( Date('Y-m-d') )}" />
 				{( elseif in_array(@type, [ 'int', 'double', 'float', 'real', 'decimal', 'tinyint', 'bigint' ]) )}
-					<input type="number" step="0.1" min="0" name="{( @this.Field )}" class="form-control" placeholder="{( echo ucfirst(@this.Field) )}" />
+					<input pattern="[\d.]+" name="{( @this.Field )}" class="form-control" placeholder="{( echo ucfirst(@this.Field) )}" />
 				{( elseif strpos(@type, 'text')!==FALSE || @type=='varchar' )}
 					<textarea name="{( @this.Field )}" class="form-control" placeholder="{( echo ucfirst(@this.Field) )}"></textarea>
 				{( elseif @type=='boolean' )}
