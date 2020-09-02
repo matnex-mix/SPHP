@@ -52,7 +52,10 @@ class Framework {
 			if( strpos($b, "-")===0  )
 				continue;
 
-			if( !@include_once ( realpath(__BASE.'/'.$b.'/autoload.php') ) ){
+			$b = realpath(__BASE.'/'.$b.'/autoload.php');
+			$GLOBALS['__MODULE_PATH'] = dirname($b);
+
+			if( !@include_once ( $b ) ){
 				Error::die([[
 					1,
 					"Middleware ($b) could not be loaded",
@@ -65,8 +68,7 @@ class Framework {
 
 	public function manage( $path ){
 
-		global $Response;
-		$target_file = __BASE.'/pages/404.php';
+		global $Response, $PAGE_DIRS;
 
 		Hooks::run( 'ON_REQUEST', $path );
 
@@ -123,20 +125,23 @@ class Framework {
 				 * End localization
 				 */
 
-				$path = __BASE.'/pages'.$path;
+				$full_path = __BASE.'/pages'.$path;
+				$target_file = self::urlToLocal($level_path, $full_path);
 
-				if( preg_match('/\.php$/', end($level_path)) && file_exists($path) ){
-					$target_file = $path;
-				} else if( end($level_path)=='' && file_exists($path.'index.php') ){
-					$target_file = $path.'index.php';
-				} else if( end($level_path)=='' && file_exists(substr($path, 0, strlen($path)-1).'.php') ){
-					$target_file = substr($path, 0, strlen($path)-1).'.php';
-				} else if( file_exists($path.'.php') ){
-					$target_file = $path.'.php';
-				} else if( file_exists($path.'/index.php') ){
-					$target_file = $path.'/index.php';
-				} else if( !file_exists($target_file) ){
-					$Response->__('
+				if( !file_exists($target_file) ){
+
+					$_404 = true;
+
+					foreach ($PAGE_DIRS??[] as $a) {
+						$target_file = self::urlToLocal($level_path, $a.'/pages'.$path);
+						if( file_exists($target_file) ){
+							$_404 = false;
+							break;
+						}
+					}
+
+					if( $_404 ){
+						$Response->__('
 <!DOCTYPE html>
 <html>
 <head>
@@ -151,11 +156,10 @@ class Framework {
 	<strong>Strongly Powered by SPhp&reg;</strong>
 </body>
 </html>
-					');
-					http_response_code(404);
-					return;
-				} else {
-					http_response_code(404);
+						');
+						http_response_code(404);
+						return;
+					}
 				}
 			}
 			
@@ -178,6 +182,25 @@ class Framework {
 			}
 		}
 	}
+
+	public function urlToLocal( $path_array, $path ){
+		$target_file = __BASE.'/pages/404.php';
+		
+		if( preg_match('/\.php$/', end($path_array)) && file_exists($path) ){
+			$target_file = $path;
+		} else if( end($path_array)=='' && file_exists($path.'index.php') ){
+			$target_file = $path.'index.php';
+		} else if( end($path_array)=='' && file_exists(substr($path, 0, strlen($path)-1).'.php') ){
+			$target_file = substr($path, 0, strlen($path)-1).'.php';
+		} else if( file_exists($path.'.php') ){
+			$target_file = $path.'.php';
+		} else if( file_exists($path.'/index.php') ){
+			$target_file = $path.'/index.php';
+		}
+
+		return $target_file;
+	}
+
 	public function secure(){
 		foreach ($_GET as $key => $value) {
 			if( is_array($value) ){
@@ -259,8 +282,12 @@ class Framework {
 	}
 
 	public function history(){
-
 		return $_SESSION['HISTORY'];
+	}
 
+	public function usePages(){
+		global $PAGE_DIRS, $__MODULE_PATH;
+		if( !in_array($__MODULE_PATH, $PAGE_DIRS ?? []) )
+			$PAGE_DIRS[] = $__MODULE_PATH;
 	}
 }
